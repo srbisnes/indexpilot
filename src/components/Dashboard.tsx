@@ -4,14 +4,13 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { PortfolioOverview } from './PortfolioOverview';
 import { RiskPanel } from './RiskPanel';
 import { AgentStatus } from './AgentStatus';
-import { Wallet, BarChart3, ShieldAlert, Bot } from 'lucide-react';
+import { Wallet, BarChart3, ShieldAlert } from 'lucide-react';
 
 export function Dashboard() {
   const { publicKey, connected } = useWallet();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Hero / Status */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold tracking-tight mb-1">Portfolio Intelligence</h2>
         <p className="text-slate-400 text-sm">
@@ -26,30 +25,18 @@ export function Dashboard() {
           </div>
           <h3 className="text-lg font-semibold mb-2">Connect your wallet</h3>
           <p className="text-slate-400 text-sm max-w-md mx-auto">
-            Connect Phantom to unlock portfolio intelligence, risk scoring and agent insights.\n          </p>
+            Connect Phantom to unlock portfolio intelligence, risk scoring and agent insights.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main column */}
           <div className="lg:col-span-2 space-y-6">
             <PortfolioOverview address={publicKey?.toBase58() || ''} />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <StatCard
-                icon={<BarChart3 className="w-5 h-5" />}
-                label="Total Value"
-                value="—"
-                sub="Loading positions…"
-              />
-              <StatCard
-                icon={<ShieldAlert className="w-5 h-5" />}
-                label="Risk Score"
-                value="—"
-                sub="Risk Engine ready"
-              />
+              <StatCard icon={<BarChart3 className="w-5 h-5" />} label="Total Value" value="—" sub="Loading positions…" />
+              <StatCard icon={<ShieldAlert className="w-5 h-5" />} label="Risk Score" value="—" sub="Risk Engine ready" />
             </div>
           </div>
-
-          {/* Sidebar */}
           <div className="space-y-6">
             <RiskPanel />
             <AgentStatus />
@@ -60,12 +47,7 @@ export function Dashboard() {
   );
 }
 
-function StatCard({
-  icon,
-  label,
-  value,
-  sub,
-}: {
+function StatCard({ icon, label, value, sub }: {
   icon: React.ReactNode;
   label: string;
   value: string;
