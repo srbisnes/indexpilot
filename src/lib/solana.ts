@@ -28,7 +28,7 @@ export function getSolanaRpcUrl(
 
   const host = url.hostname.toLowerCase();
   const clusterHosts: Record<SolanaNetwork, string[]> = {
-    'mainnet-beta': ['api.mainnet.solana.com'],
+    'mainnet-beta': ['https://api.mainnet-beta.solana.com'],
     devnet: ['api.devnet.solana.com'],
     testnet: ['api.testnet.solana.com'],
   };
