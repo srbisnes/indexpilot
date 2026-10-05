@@ -12,18 +12,18 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "@solana/web3.js": "^1.95.3",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
-    "@solana/wallet-adapter-wallets": "^0.19.32",
     "bs58": "^5.0.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.441.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "@solana/wallet-adapter-phantom": "0.9.30"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
@@ -32,10 +32,19 @@
     "typescript": "^5.5.3",
     "vitest": "^2.0.5",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint-config-next": "14.2.35",
     "tailwindcss": "^3.4.7",
     "postcss": "^8.4.40",
     "autoprefixer": "^10.4.19",
     "@tailwindcss/forms": "^0.5.7"
+  },
+  "engines": {
+    "node": ">=22.12.0 <25",
+    "npm": ">=10.9.0"
+  },
+  "overrides": {
+    "baseline-browser-mapping": "2.11.26",
+    "@types/react": "18.3.24",
+    "@types/react-dom": "18.3.7"
   }
 }
