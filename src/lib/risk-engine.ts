@@ -46,7 +46,7 @@ export function volatilityScore(positions: Position[]): number {
 /** Simple liquidity proxy */
 export function liquidityScore(positions: Position[]): number {
   // Placeholder: assume higher number of positions = better liquidity diversity
-  if (positions.length === 0) return 50;
+  if (positions.length === 0) return 0;
   return Math.max(10, 100 - positions.length * 5);
 }
 
