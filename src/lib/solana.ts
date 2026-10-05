@@ -17,11 +17,29 @@ export function getSolanaRpcUrl(
   network = getSolanaNetwork(),
   configuredUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL,
 ): string {
-  // Se houver uma URL configurada na Vercel (com https://), usa ela diretamente
-  if (configuredUrl && (configuredUrl.startsWith('http://') || configuredUrl.startsWith('https://'))) {
-    return configuredUrl;
+  const expected = NETWORKS[network];
+  if (!configuredUrl) return expected;
+
+  const url = new URL(configuredUrl);
+  if (!['http:', 'https:'].includes(url.protocol)) {
+    throw new Error('Solana RPC URL must use HTTP or HTTPS.');
   }
-  return NETWORKS[network] || clusterApiUrl('mainnet-beta');
+
+  const host = url.hostname.toLowerCase();
+  const clusterHosts: Record<SolanaNetwork, string[]> = {
+    'mainnet-beta': ['api.mainnet-beta.solana.com', 'api.mainnet.solana.com'],
+    devnet: ['api.devnet.solana.com'],
+    testnet: ['api.testnet.solana.com'],
+  };
+
+  const isOfficialClusterHost = clusterHosts[network]?.includes(host);
+  const isLocal = host === 'localhost' || host === '127.0.0.1';
+
+  if (!isOfficialClusterHost && !isLocal) {
+    throw new Error(`RPC host does not match selected Solana network: ${network}`);
+  }
+
+  return configuredUrl;
 }
 
 export function getSolanaConfig() {
